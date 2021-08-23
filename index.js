@@ -3,6 +3,10 @@ const app = express();
 const PORT = 3000;
 const data = require('./data.js');
 
+
+app.use(express.urlencoded( { extended: true }));
+app.use(express.json());
+
 // Route to home page
 app.get('/', (req, res) => {
     res.send('Welcome to our schedule website')
@@ -10,7 +14,7 @@ app.get('/', (req, res) => {
 
 // Route to users
 app.get('/users', (req, res) => {
-    res.send(data.users)
+    res.send(data.users);
 })
 
 // Route for an individual user
@@ -43,6 +47,24 @@ app.get('/users/:id/schedules', (req, res) => {
 app.get('/schedules', (req, res) => {
     res.send(data.schedules)
 })
+
+// Add a new user
+
+app.post('/users', (req, res) => {
+    const users = data.users;
+    const post = req.body;
+    users.push(post);
+    res.redirect('/users')
+});
+
+// Add a new user schedule
+
+app.post('/schedules', (req, res) => {
+    const schedules = data.schedules;
+    const post = req.body;
+    schedules.push(post);
+    res.redirect('/schedules')
+});
 
 
 app.listen(PORT, () => {
