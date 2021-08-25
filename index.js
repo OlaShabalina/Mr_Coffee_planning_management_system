@@ -5,8 +5,8 @@ const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 
 // formating for the data
-app.use(express.urlencoded( { extended: true }));
 app.use(express.json());
+app.use(express.urlencoded( { extended: true }));
 
 
 // taking data out of the file data.js
@@ -50,10 +50,15 @@ app.post('/schedules', (req, res) => {
 // Route for an individual user
 app.get('/users/:id', (req, res) => {
     const { id } = req.params;
-    for (let i = 0; i < users.length; i++ ) {
-        if (i == id) {
-            res.send(users[i]);
+    const userFound = users.find((user, index) => {
+        if (index == id) {
+            return user;
         };
+    });
+    if (userFound) {
+        res.send(userFound);
+    } else {
+        res.send(`User ${id} does not exist in our database.`);
     }
 })
 
@@ -61,13 +66,14 @@ app.get('/users/:id', (req, res) => {
 
 app.get('/users/:id/schedules', (req, res) => {
     const { id } = req.params;
-    const schedulesShown = [];
-    for ( let schedule of schedules) {
-        if (schedule.user_id == id) {
-            schedulesShown.push(schedule);
-        }
+    const filteredSchedules = schedules.filter((schedule) => {
+        return schedule.user_id == id;
+    });
+    if (filteredSchedules.length > 0) {
+        res.send(filteredSchedules);
+    } else {
+        res.send(`This user doesn't exists or doesn't have a schedule yet`);
     }
-    res.send(schedulesShown);
 });
 
 // Route to schedules
