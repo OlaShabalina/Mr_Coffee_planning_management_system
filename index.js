@@ -4,10 +4,12 @@ const PORT = 3000;
 const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 
-// formating for the data
+// Body Parser
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
 
+// Set view engine as EJS
+app.set('view engine', 'ejs');
 
 // taking data out of the file data.js
 const users = data.users;
