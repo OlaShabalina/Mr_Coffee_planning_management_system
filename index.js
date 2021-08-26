@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 8080;
+const PORT = 1000;
 const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 
@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt'); // Password encryption
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
 
-// Set view engine as EJS
+// Set view engine as EJS 
 app.set('view engine', 'ejs');
 
 // taking data out of the file data.js
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 // Route to users
 app.get('/users', (req, res) => {
-    res.send(data.users);
+    res.render('users', { users });
 })
 
 // Add a new user
