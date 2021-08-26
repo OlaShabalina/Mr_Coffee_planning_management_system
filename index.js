@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 
@@ -17,7 +17,7 @@ const schedules = data.schedules;
 
 // Route to home page
 app.get('/', (req, res) => {
-    res.send('Welcome to our schedule website')
+    res.render('home');
 })
 
 // Route to users
