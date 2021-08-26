@@ -1,0 +1,25 @@
+<%- include('partials/head')%>
+
+    <title>Users</title>
+</head>
+<body>
+    <%- include('partials/navbar')%>
+    <h1 class="text-center">User details<%= userFound.name %> </h1>
+        <div class="row d-flex align-items-center justify-content-center">          
+                <div class="col-sm-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Information about the user:</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Name:</b> <%= userFound.firstname %>  </li>
+                                <li class="list-group-item"><b>Surname:</b> <%= userFound.lastname %> </li>
+                                <li class="list-group-item"><b>Email:</b> <%= userFound.email %> </li>
+                                <li class="list-group-item"><b>Password:</b> <%= userFound.password %> </li>
+                            </ul>
+                            <a href="/users/schedules " class="btn btn-secondary">See this User's schedules</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    
+<%- include('partials/footer')%>

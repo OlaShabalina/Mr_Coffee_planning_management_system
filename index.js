@@ -58,7 +58,7 @@ app.get('/users/:id', (req, res) => {
         };
     });
     if (userFound) {
-        res.send(userFound);
+        res.render('user-info', { userFound });
     } else {
         res.send(`User ${id} does not exist in our database.`);
     }
@@ -80,7 +80,7 @@ app.get('/users/:id/schedules', (req, res) => {
 
 // Route to schedules
 app.get('/schedules', (req, res) => {
-    res.send(data.schedules)
+    res.render('schedules', { schedules })
 })
 
 app.listen(PORT, () => {
