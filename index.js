@@ -69,13 +69,14 @@ app.get('/users/:id', (req, res) => {
 
 app.get('/users/:id/schedules', (req, res) => {
     const { id } = req.params;
+    const errorMessage = `User ${id} doesn't exists or doesn't have a schedule yet`
     const filteredSchedules = schedules.filter((schedule) => {
         return schedule.user_id == id;
     });
     if (filteredSchedules.length > 0) {
-        res.send(filteredSchedules);
+        res.render('user-schedule', { filteredSchedules, id });
     } else {
-        res.send(`This user doesn't exists or doesn't have a schedule yet`);
+        res.render('error', { errorMessage });
     }
 });
 

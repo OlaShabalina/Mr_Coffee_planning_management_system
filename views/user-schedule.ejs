@@ -1,0 +1,26 @@
+<%- include('partials/head')%>
+
+    <title>Schedules</title>
+</head>
+<body>
+    <%- include('partials/navbar')%>
+    <h1 class="text-center">Schedules of User <%= id %> </h1>
+    <div class="row gy-4 d-flex align-items-center justify-content-center">
+        <% for (let i = 0; i < filteredSchedules.length; i++) { %> 
+        <div class="col-sm-6">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Schedules <%= i + 1 %></h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>User id:</b> <%= filteredSchedules[i].user_id %>  </li>
+                        <li class="list-group-item"><b>Day:</b> <%= filteredSchedules[i].day %> </li>
+                        <li class="list-group-item"><b>Starts at:</b> <%= filteredSchedules[i].start_at %> </li>
+                        <li class="list-group-item"><b>Finishes at:</b> <%= filteredSchedules[i].end_at %> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <% } %> 
+    </div>
+    
+<%- include('partials/footer')%>
