@@ -16,7 +16,8 @@
                                 <li class="list-group-item"><b>Email:</b> <%= userFound.email %> </li>
                                 <li class="list-group-item"><b>Password:</b> <%= userFound.password %> </li>
                             </ul>
-                            <a href="/users/schedules " class="btn btn-secondary">See this User's schedules</a>
+                            <a href="/users/<%= id %>/schedules" class="btn btn-secondary">User's schedules</a>
+                            <a href="/users" class="btn btn-outline-dark">Back to all Users</a>
                         </div>
                     </div>
                 </div>

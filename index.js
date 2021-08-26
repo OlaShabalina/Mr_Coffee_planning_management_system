@@ -52,15 +52,16 @@ app.post('/schedules', (req, res) => {
 // Route for an individual user
 app.get('/users/:id', (req, res) => {
     const { id } = req.params;
+    const errorMessage = `There is no user with id ${id} in our system`
     const userFound = users.find((user, index) => {
         if (index == id) {
             return user;
         };
     });
     if (userFound) {
-        res.render('user-info', { userFound });
+        res.render('user-info', { userFound, id });
     } else {
-        res.send(`User ${id} does not exist in our database.`);
+        res.render('error', { errorMessage });
     }
 })
 
