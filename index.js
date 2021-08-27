@@ -8,6 +8,9 @@ const bcrypt = require('bcrypt'); // Password encryption
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
 
+// Setting up our static folder
+app.use(express.static('public'))
+
 // Set view engine as EJS 
 app.set('view engine', 'ejs');
 
@@ -17,18 +20,18 @@ const schedules = data.schedules;
 
 // Route to home page
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('pages/home');
 })
 
 // Route to users
 app.get('/users', (req, res) => {
-    res.render('users', { users });
+    res.render('pages/users', { users });
 })
 
 // Add a new user
 
 app.get('/users/new', (req, res) => {
-    res.render('user-new');
+    res.render('pages/user-new');
 })
 
 app.post('/users', (req, res) => {
@@ -37,20 +40,31 @@ app.post('/users', (req, res) => {
     bcrypt.hash(password, 10, (err, hash) => {
         password = hash;
         users.push({firstname, lastname, email, password});
+        res.redirect('/users');
     });
-    res.redirect('/users');
 });
 
 // Add a new user schedule
 
+app.get('/schedules/new', (req, res) => {
+    res.render('pages/schedule-new', { users });
+})
+
 app.post('/schedules', (req, res) => {
-    const { user_id, day, start_at, end_at } = req.body;
-    if (user_id < users.length) {
-        schedules.push({ user_id, day, start_at, end_at });
-        res.redirect('/schedules');
-    } else {
-        res.send(`User ${user_id} doesn't exists`);
-    }
+    const { user, dayOfWeek, start_at, end_at } = req.body;
+
+    const user_id = users.findIndex((item, index) => {
+        const userArray = user.split(' ');
+        return userArray[0] === item.firstname && userArray[1] === item.lastname;
+    });
+
+    const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const day = week.findIndex((item) => {
+        return dayOfWeek == item;    
+    }) + 1;
+
+    schedules.push({ user_id, day, start_at, end_at });
+    res.redirect('/schedules')
 });
 
 // Route for an individual user
@@ -63,9 +77,9 @@ app.get('/users/:id', (req, res) => {
         };
     });
     if (userFound) {
-        res.render('user-info', { userFound, id });
+        res.render('pages/user-info', { userFound, id });
     } else {
-        res.render('error', { errorMessage });
+        res.render('pages/error', { errorMessage });
     }
 })
 
@@ -78,18 +92,17 @@ app.get('/users/:id/schedules', (req, res) => {
         return schedule.user_id == id;
     });
     if (filteredSchedules.length > 0) {
-        res.render('user-schedule', { filteredSchedules, id });
+        res.render('pages/user-schedule', { filteredSchedules, id });
     } else {
-        res.render('error', { errorMessage });
+        res.render('pages/error', { errorMessage });
     }
 });
 
 // Route to schedules
 app.get('/schedules', (req, res) => {
-    res.render('schedules', { schedules })
+    res.render('pages/schedules', { schedules })
 })
 
 app.listen(PORT, () => {
     console.log(`Listening to http://localhost:${PORT}`)
 })
-

@@ -1,0 +1,40 @@
+<%- include('partials/head')%>
+
+    <title>Create a new schedule</title>
+</head>
+<body>
+    <%- include('partials/navbar')%>
+    <h1 class="text-center">Create a new schedule</h1>
+    <form action="/schedules" method="POST">
+        <div class="mb-3">            
+            <label for="user" class="form-label">User</label>
+            <select id="user" name="user" class="form-select">
+                <% users.forEach((user) => { %>
+                    <option selected><%= user.firstname %> <%= user.lastname %> </option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="dayOfWeek" class="form-label">User</label>
+            <select class="form-select" name="dayOfWeek" id="dayOfWeek">
+                <option selected>Monday</option>
+                <option selected>Tuesday</option>
+                <option selected>Wednesday</option>
+                <option selected>Thursday</option>
+                <option selected>Friday</option>
+                <option selected>Saturday</option>
+                <option selected>Sunday</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="start_at" class="form-label d-block">User</label>
+            <input name="start_at" id="start_at" type="time">
+        </div>
+        <div class="mb-3">
+            <label for="end_at" class="form-label d-block">User</label>
+            <input name="end_at" id="end_at" type="time">
+        </div>
+        <button type="submit" class="btn btn-secondary">Submit</button>
+      </form>
+        
+<%- include('partials/footer')%>
