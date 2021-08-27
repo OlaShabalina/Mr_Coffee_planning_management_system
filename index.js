@@ -27,6 +27,10 @@ app.get('/users', (req, res) => {
 
 // Add a new user
 
+app.get('/users/new', (req, res) => {
+    res.render('user-new');
+})
+
 app.post('/users', (req, res) => {
     let { firstname, lastname, email, password } = req.body;
     // Password encryption

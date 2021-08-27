@@ -6,22 +6,22 @@
     <%- include('partials/navbar')%>
     <h1 class="text-center">Schedules:</h1>
     <div class="row gy-4 text-center">
-        <% for (let i = 0; i < schedules.length; i++) { %> 
+        <% schedules.forEach((schedule, index) => { %> 
         <div class="col-sm-6">
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Schedule <%= i + 1 %></h5>
+                    <h5 class="card-title">Schedule <%= index + 1 %></h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>User id:</b> <%= schedules[i].user_id %>  </li>
-                        <li class="list-group-item"><b>Day:</b> <%= schedules[i].day %> </li>
-                        <li class="list-group-item"><b>Starts at:</b> <%= schedules[i].start_at %> </li>
-                        <li class="list-group-item"><b>Finishes at:</b> <%= schedules[i].end_at %> </li>
+                        <li class="list-group-item"><b>User id:</b> <%= schedule.user_id %>  </li>
+                        <li class="list-group-item"><b>Day:</b> <%= schedule.day %> </li>
+                        <li class="list-group-item"><b>Starts at:</b> <%= schedule.start_at %> </li>
+                        <li class="list-group-item"><b>Finishes at:</b> <%= schedule.end_at %> </li>
                     </ul>
-                    <a href="/users/<%= schedules[i].user_id %>/schedules " class="btn btn-secondary">All schedules of this User</a>
+                    <a href="/users/<%= schedule.user_id %>/schedules " class="btn btn-secondary">All schedules of this User</a>
                 </div>
             </div>
         </div>
-        <% } %> 
+        <% }) %> 
     </div>
     
 <%- include('partials/footer')%>
