@@ -3,13 +3,14 @@ const app = express();
 const PORT = 1000;
 const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
+const path = require('path');
 
 // Body Parser
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
 
 // Setting up our static folder
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname,'public')));
 
 // Set view engine as EJS 
 app.set('view engine', 'ejs');
@@ -17,6 +18,7 @@ app.set('view engine', 'ejs');
 // taking data out of the file data.js
 const users = data.users;
 const schedules = data.schedules;
+users.sort();
 
 // Route to home page
 app.get('/', (req, res) => {
@@ -70,7 +72,7 @@ app.post('/schedules', (req, res) => {
 // Route for an individual user
 app.get('/users/:id', (req, res) => {
     const { id } = req.params;
-    const errorMessage = `There is no user with id ${id} in our system`
+    const errorMessage = `There is no user with id ${id} in our system`;
     const userFound = users.find((user, index) => {
         if (index == id) {
             return user;
@@ -87,7 +89,7 @@ app.get('/users/:id', (req, res) => {
 
 app.get('/users/:id/schedules', (req, res) => {
     const { id } = req.params;
-    const errorMessage = `User ${id} doesn't exists or doesn't have a schedule yet`
+    const errorMessage = `User ${id} doesn't have a schedule yet`
     const filteredSchedules = schedules.filter((schedule) => {
         return schedule.user_id == id;
     });

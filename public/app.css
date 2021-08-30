@@ -1,0 +1,23 @@
+h1 {
+    color: rgb(59, 59, 59);
+}
+
+h5 {
+    color: green;
+}
+
+.btn-danger::placeholder {
+    color: #ffffff;
+}
+
+.container {
+    max-width: 600px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#create-schedule , #create-user-form {
+    width: 100%;
+}
