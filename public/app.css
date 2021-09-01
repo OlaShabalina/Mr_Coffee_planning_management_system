@@ -9,15 +9,3 @@ h5 {
 .btn-danger::placeholder {
     color: #ffffff;
 }
-
-.container {
-    max-width: 600px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#create-schedule , #create-user-form {
-    width: 100%;
-}

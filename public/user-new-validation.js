@@ -1,4 +1,3 @@
-// Will work on validation for the forms
 const createUserForm = document.querySelector('#create-user-form');
 
 // Form elements here

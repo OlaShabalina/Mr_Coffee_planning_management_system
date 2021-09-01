@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 1000;
+const PORT = process.env.PORT || 3000
 const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 const path = require('path');
