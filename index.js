@@ -5,6 +5,9 @@ const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 const path = require('path');
 
+// integrating database
+const db = require('./database');
+
 // Body Parser
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));

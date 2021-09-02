@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "data.js",
-  "scripts": {},
+  "scripts": {
+    "create-db": "psql -U postgres -f sql/create-db.sql",
+    "create-table": "psql -U postgres -d schedule_app -f sql/create-table.sql",
+    "seed-table": "psql -U postgres -d schedule_app -f sql/seed-table.sql",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OlaShabalina/incode_project3.git"
