@@ -7,11 +7,11 @@
     <h1 class="text-center">Schedules:</h1>
     <div class="row gy-4 text-center">
         <a href="/schedules/new" class="btn btn-outline-success align-s">Create new schedule</a>
-        <% schedules.forEach((schedule, index) => { %> 
+        <% schedules.forEach((schedule) => { %> 
         <div class="col-sm-6">
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Schedule <%= index + 1 %></h5>
+                    <h5 class="card-title">Schedule <%= schedule.schedule_id %></h5>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><b>User id:</b> <%= schedule.user_id %>  </li>
                         <li class="list-group-item"><b>Day:</b> <%= schedule.day %> </li>

@@ -7,23 +7,23 @@
     <h1 class="text-center">Users</h1>
         <div class="row gy-4">
             <a href="/users/new" class="btn btn-outline-success align-s">Create new user</a>
-            <% for (let i = 0; i < users.length; i++) { %>            
+            <% users.forEach((user) => { %>             
                 <div class="col-sm-6">
                     <div class="card text-center">
                         <div class="card-body">
-                            <h5 class="card-title">User <%= i %> </h5>
+                            <h5 class="card-title">User <%= user.user_id %> </h5>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><b>Name:</b> <%= users[i].firstname %>  </li>
-                                <li class="list-group-item"><b>Surname:</b> <%= users[i].lastname %> </li>
-                                <li class="list-group-item"><b>Email:</b> <%= users[i].email %> </li>
-                                <li class="list-group-item"><b>Password:</b> <%= users[i].password %> </li>
+                                <li class="list-group-item"><b>Name:</b> <%= user.firstname %>  </li>
+                                <li class="list-group-item"><b>Surname:</b> <%= user.lastname %> </li>
+                                <li class="list-group-item"><b>Email:</b> <%= user.email %> </li>
+                                <li class="list-group-item"><b>Password:</b> <%= user.password %> </li>
                             </ul>
-                            <a href="/users/<%= i %> " class="btn btn-secondary">Details</a>
-                            <a href="/users/<%= i %>/schedules " class="btn btn-secondary">User's schedules</a>
+                            <a href="/users/<%= user.user_id %> " class="btn btn-secondary">Details</a>
+                            <a href="/users/<%= user.user_id %>/schedules " class="btn btn-secondary">User's schedules</a>
                         </div>
                     </div>
                 </div>
-            <% }; %> 
+            <% }) %> 
         </div>
     
 <%- include('partials/footer')%>

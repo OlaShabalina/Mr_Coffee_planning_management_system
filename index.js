@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000
-const data = require('./data.js'); // Access to our in-file database
+// const data = require('./data.js'); // Access to our in-file database
 const bcrypt = require('bcrypt'); // Password encryption
 const path = require('path');
 
@@ -19,9 +19,9 @@ app.use(express.static(path.join(__dirname,'public')));
 app.set('view engine', 'ejs');
 
 // taking data out of the file data.js
-const users = data.users;
-const schedules = data.schedules;
-users.sort();
+// const users = data.users;
+// const schedules = data.schedules;
+// users.sort();
 
 // Route to home page
 app.get('/', (req, res) => {
@@ -30,7 +30,13 @@ app.get('/', (req, res) => {
 
 // Route to users
 app.get('/users', (req, res) => {
-    res.render('pages/users', { users });
+    db.any('SELECT * FROM users;')
+    .then(users => {
+        res.render('pages/users', { users })
+    })
+    .catch(error => {
+        res.send(error)
+    });
 })
 
 // Add a new user
@@ -105,7 +111,14 @@ app.get('/users/:id/schedules', (req, res) => {
 
 // Route to schedules
 app.get('/schedules', (req, res) => {
-    res.render('pages/schedules', { schedules })
+    db.any('SELECT * FROM schedules;')
+    .then(schedules => {
+        console.log(schedules)
+        res.render('pages/schedules', { schedules })
+    })
+    .catch(error => {
+        res.send(error)
+    });
 })
 
 app.listen(PORT, () => {
