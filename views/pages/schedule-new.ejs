@@ -8,23 +8,23 @@
     <div class="container">
         <form action="/schedules" method="POST" id="create-schedule">
             <div class="mb-3">            
-                <label for="user" class="form-label">User</label>
-                <select id="user" name="user" class="form-select">
+                <label for="user_id" class="form-label">User</label>
+                <select id="user_id" name="user_id" class="form-select">
                     <% users.forEach((user) => { %>
-                        <option><%= user.firstname %> <%= user.lastname %> </option>
+                        <option value='<%= user.user_id %> '><%= user.firstname %> <%= user.lastname %> </option>
                     <% }) %>
                 </select>
             </div>
             <div class="mb-3">
-                <label for="dayOfWeek" class="form-label">Day of the week</label>
-                <select class="form-select" name="dayOfWeek" id="dayOfWeek">
-                    <option selected>Monday</option>
-                    <option>Tuesday</option>
-                    <option>Wednesday</option>
-                    <option>Thursday</option>
-                    <option>Friday</option>
-                    <option>Saturday</option>
-                    <option>Sunday</option>
+                <label for="day" class="form-label">Day of the week</label>
+                <select class="form-select" name="day" id="day">
+                    <option value="1" selected>Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
                 </select>
             </div>
             <div class="mb-3">

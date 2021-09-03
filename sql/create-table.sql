@@ -14,8 +14,8 @@ DROP TABLE IF EXISTS schedules;
 
 CREATE TABLE IF NOT EXISTS schedules (
     schedule_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(user_id),
-    day SMALLINT CHECK (day BETWEEN 1 AND 7),
-    start_at TIME,
-    end_at TIME
+    user_id INTEGER REFERENCES users(user_id) NOT NULL,
+    day SMALLINT CHECK (day BETWEEN 1 AND 7) NOT NULL,
+    start_at TIME NOT NULL,
+    end_at TIME NOT NULL
 );
