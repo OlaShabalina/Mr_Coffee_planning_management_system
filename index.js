@@ -67,8 +67,8 @@ app.get('/schedules/new', (req, res) => {
 })
 
 app.post('/schedules', (req, res) => {
-    const { user_id, day, start_at, end_at } = req.body;
-
+    let { user_id, day, start_at, end_at } = req.body;
+    
     db.none('INSERT INTO schedules(user_id, day, start_at, end_at) VALUES($1, $2, $3, $4);', [user_id, day, start_at, end_at])
     .then(() => {
         res.redirect('/schedules');
@@ -121,15 +121,31 @@ app.get('/users/:id/schedules', (req, res) => {
 
 // Route to schedules
 app.get('/schedules', (req, res) => {
-    db.any('SELECT * FROM schedules;')
-    .then(schedules => {
+    db.any('SELECT firstname,lastname,day,start_at,end_at FROM schedules INNER JOIN users ON schedules.user_id = users.user_id;')
+    .then((schedules) => {
+        schedules.forEach((schedule) => {
+            
+            // showing days of the week instea of index 
+            const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            for (let i = 1; i <= 7; i++) {
+                if (i == schedule.day) {
+                    schedule.day = week[i - 1];
+                };
+            };            
+
+            // formating time not to show seconds
+            schedule.start_at = schedule.start_at.split(':').slice(0,2).join(':');
+            schedule.end_at = schedule.end_at.split(':').slice(0,2).join(':');
+
+            return schedule;
+        });
         res.render('pages/schedules', { schedules })
     })
     .catch(error => {
         res.send(error)
     });
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Listening to http://localhost:${PORT}`)
-})
+});

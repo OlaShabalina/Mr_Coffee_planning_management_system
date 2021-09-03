@@ -13,10 +13,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Schedule <%= schedule.schedule_id %></h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>User id:</b> <%= schedule.user_id %>  </li>
+                        <li class="list-group-item"><b>User:</b> <%= schedule.firstname %> <%= schedule.lastname %> </li>
                         <li class="list-group-item"><b>Day:</b> <%= schedule.day %> </li>
-                        <li class="list-group-item"><b>Starts at:</b> <%= schedule.start_at %> </li>
-                        <li class="list-group-item"><b>Finishes at:</b> <%= schedule.end_at %> </li>
+                        <li class="list-group-item"><b></b> <%= schedule.start_at %> - </b> <%= schedule.end_at %></li>
                     </ul>
                     <a href="/users/<%= schedule.user_id %>/schedules " class="btn btn-secondary">All schedules of this User</a>
                 </div>

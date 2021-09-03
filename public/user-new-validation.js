@@ -20,6 +20,8 @@ createUserForm.addEventListener('submit', (e) => {
 
 });
 
+
+
 //Function to validate name and surname (text only)
 
 function isNameValid(input) {
