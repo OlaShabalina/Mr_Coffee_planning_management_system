@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 
 // Route to schedules
 router.get('/', (req, res) => {
-    db.any('SELECT firstname,lastname,day,start_at,end_at,users.user_id FROM schedules INNER JOIN users ON schedules.user_id = users.user_id;')
+    db.any('SELECT firstname,lastname,day,start_at,end_at,schedule_id,schedules.user_id FROM schedules INNER JOIN users ON schedules.user_id = users.user_id;')
     .then((schedules) => {
         schedules.forEach((schedule) => {
             
