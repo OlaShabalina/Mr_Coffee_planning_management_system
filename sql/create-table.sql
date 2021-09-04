@@ -1,5 +1,5 @@
 -- Creating table for storying users
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Creating table for storying schedules
-DROP TABLE IF EXISTS schedules;
+DROP TABLE IF EXISTS schedules CASCADE;
 
 CREATE TABLE IF NOT EXISTS schedules (
     schedule_id SERIAL PRIMARY KEY,
